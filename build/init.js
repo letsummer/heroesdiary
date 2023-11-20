@@ -1,5 +1,6 @@
 "use strict";
 
+require("dotenv/config");
 require("./db.js");
 require("./models/Diary.js");
 var _index = _interopRequireDefault(require("./index.js"));

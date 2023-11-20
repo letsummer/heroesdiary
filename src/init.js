@@ -1,3 +1,4 @@
+import "dotenv/config";
 import "./db.js";
 import "./models/Diary.js";
 import app from "./index.js";
