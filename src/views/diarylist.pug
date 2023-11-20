@@ -1,0 +1,10 @@
+extends layouts/layout.pug
+include mixins/diarytitle
+//- block script
+block content 
+    //- h5 diary list
+    //- each item in diaries
+    //-     +diarytitle(item)
+    //- else
+    //-     li sorry not found.
+    include layouts/calendar.pug

@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="x-ua-compatible" content="IE=9" /><title>
+	KBO
+</title><link rel="shortcut icon" type="image/x-icon" href="/images/common/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/min/css/common.min.css?version=20230822" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/font.css?version=" />
+	<link rel="stylesheet" type="text/css" href="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/min/css/jquery-ui.min.css?version=20230822"/>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/min/js/common.min.js?version=20230330_2"></script>
+	<script type="text/javascript" src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/min/js/jquery-ui.min.js?version=20230330_2"></script>
+    
+
+
+<link rel="Stylesheet" type="text/css" href="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/min/css/layout.min.css?version=20230822" />
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        onLnb("0301");
+
+        $('.calendar').mouseenter(function () {
+            $("#contents .standing_day .today a, #contents .standing_day .today span, #contents .standing_day .today img").attr("src", "https://lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/btn_cal_on.png");
+        });
+
+        $('.calendar').mouseleave(function () {
+            $("#contents .standing_day .today a, #contents .standing_day .today span, #contents .standing_day .today img").attr("src", "https://lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/btn_cal_off.png");
+        });
+
+    });
+
+    $(document).ready(function () {
+        $("#cphContainer_cphContainer_cphContent_cphContent_txtCalendarDate").datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: "https://lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/btn_cal_off.png",
+            buttonText: "달력",
+            dateFormat: "yy-mm-dd'(D)'",
+            minDate: new Date("2010/03/01"),
+            beforeShow: function (input) {
+                var i_offset = $(input).offset(); //클릭된 input의 위치값 체크
+                setTimeout(function () {
+                    $('#ui-datepicker-div').css({ 'top': 259, 'bottom': '', 'left': i_offset.left - 163 });
+                })
+            },
+            onSelect: function (dateText, inst) {
+                document.location.href = "/Schedule/Scoreboard.aspx?searchDate=" + dateText.substring(0, 10);
+            }
+        });
+    });
+
+</script>
+
+
+
+
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-15700655-22', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+    <form method="post" action="./Scoreboard.aspx?searchDate=2023-10-11" id="mainForm">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTU5OTIyMjc1MQ9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWAgIDD2QWAgIDD2QWAgIBD2QWAgIBD2QWAgIBD2QWBAIDDw8WAh4EVGV4dAUPMjAyMy4xMC4xMShXRUQpZGQCCQ8WAh4LXyFJdGVtQ291bnQCAhYEZg9kFhBmDxUCG3JlZ3VsYXIvMjAyMy9lYmxfaDMxX09CLnBuZwZET09TQU5kAgEPDxYCHwAFATNkZAICDw8WAh8ABQVGSU5BTGRkAgMPDxYCHwAFAjE0ZGQCBA8VAQVMT1RURWQCBQ8VAxtyZWd1bGFyLzIwMjMvZWJsX2gzMV9MVC5wbmcFU0FKSUsFMTg6MzBkAgYPFgIfAAVaPHNwYW4gY2xhc3M9J2xvY2FsX3cnPlc6IFBBUksgU2UgV29vbmc8L3NwYW4+PHNwYW4gY2xhc3M9J2xvY2FsX2wnPkw6IENIT0kgV29uIEpvb248L3NwYW4+ZAIHDxYCHwECAhYEZg9kFgZmDxUQBkRPT1NBTgExATABMAExATEBMAEwATABMAEtAS0BLQEtAS0BLWQCAQ8VCgAAAAAAAAAAAABkAgIPFQQBMwE3ATEBM2QCAQ9kFgZmDxUQBUxPVFRFATEBMgEyATMBMAEzATEBMgEtAS0BLQEtAS0BLQEtZAIBDxUKAAAAAAAAAAAAAGQCAg8VBAIxNAIxNwEwAjExZAIBD2QWEGYPFQIbcmVndWxhci8yMDIzL2VibF9oMzFfV08ucG5nBktJV09PTWQCAQ8PFgIfAAUBMGRkAgIPDxYCHwAFBUZJTkFMZGQCAw8PFgIfAAUCMTFkZAIEDxUBA0tJQWQCBQ8VAxtyZWd1bGFyLzIwMjMvZWJsX2gzMV9IVC5wbmcHR1dBTkdKVQUxODozMGQCBg8WAh8ABVs8c3BhbiBjbGFzcz0nbG9jYWxfdyc+VzogWUFORyBIeWVvbiBKb25nPC9zcGFuPjxzcGFuIGNsYXNzPSdsb2NhbF9sJz5MOiBMRUUgSm9uZyBNaW48L3NwYW4+ZAIHDxYCHwECAhYEZg9kFgZmDxUQBktJV09PTQEwATABMAEwATABMAEwATABMAEtAS0BLQEtAS0BLWQCAQ8VCgAAAAAAAAAAAABkAgIPFQQBMAE3ATQBMGQCAQ9kFgZmDxUQA0tJQQEwATYBMQEwATQBMAEwATABLQEtAS0BLQEtAS0BLWQCAQ8VCgAAAAAAAAAAAABkAgIPFQQCMTEBOQEwAThkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYCBVFjdGwwMCRjdGwwMCRjdGwwMCRjdGwwMCRjcGhDb250YWluZXIkY3BoQ29udGFpbmVyJGNwaENvbnRlbnQkY3BoQ29udGVudCRidG5CZWZvcmUFT2N0bDAwJGN0bDAwJGN0bDAwJGN0bDAwJGNwaENvbnRhaW5lciRjcGhDb250YWluZXIkY3BoQ29udGVudCRjcGhDb250ZW50JGJ0bk5leHTVxXtsSDP+rZYe3V14trz6vcnodw==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['mainForm'];
+if (!theForm) {
+    theForm = document.mainForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="169B9AF4" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAes/B/GJ8PY/ZKvLFerV44p2E4cICodjCdim4JsrIdV9kcaVaDkq4TBwyAd9Dl2hVlagR2KFG9tREYWKU+mKO/DSSjjO+JrN8ShR3IRB3sc+M1bMIovpfEpe/w/9Rww6Aod774GrjiPQ8KSHl+p+82NzD4uFFXR9QYU/pUk4vZAz6xtkI0=" />
+</div>
+        
+<script type="text/javascript">
+function playerSearch() {
+    if (document.getElementById("cphHeader_txtPlayerSearch").value == "Player Search") {
+
+    }
+    else {
+        __doPostBack('ctl00$ctl00$ctl00$ctl00$cphHeader$btnPlayerSearch','');
+    }
+}
+</script>
+<div id="header">
+	<div id="header_top">
+		<div id="srch_bar">
+			<div class="srch_box">
+				<ul>
+					<li><a href="http://www.koreabaseball.com/Default.aspx" class="on"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/ico_lang_ko.png" alt="korean" />&nbsp;<span>Korean</span></a></li>
+					<li><a href="/Etc/Sitemap.aspx"><span class="last">Sitemap</span></a></li>
+					
+					<li>
+						<fieldset class="srch_player">
+							<input name="ctl00$ctl00$ctl00$ctl00$cphHeader$txtPlayerSearch" type="text" id="cphHeader_txtPlayerSearch" title="Player Search" value="Player Search" onclick="javascript:this.value=&#39;&#39;;" /><input type="image" title="search" src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/btn_srch.png" onclick="javascript:playerSearch();" />
+						</fieldset>
+					</li>
+				</ul>
+			</div>
+		</div> <!--//srch_bar -->
+        <a id="cphHeader_btnPlayerSearch" href="javascript:__doPostBack(&#39;ctl00$ctl00$ctl00$ctl00$cphHeader$btnPlayerSearch&#39;,&#39;&#39;)"></a>
+		<div id="gnb" class="tabs">
+			<div class="gnb_tit">
+					<a href="/Default.aspx">
+						<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/logo_kbo_k.png" alt="" />
+					</a>
+				
+			</div> <!--//gnb_tit -->
+			<ul class="tabMenu">
+				<li><a id="#tab1" href="/About/AboutKbo.aspx" class="depth_01"><span>ABOUT KBO</span></a></li>
+				<li><a id="#tab2" href="/Teams/TeamInformation.aspx" class="depth_02"><span>TEAMS</span></a></li>
+				<li><a id="#tab3" href="/Schedule/Scoreboard.aspx" class="depth_03"><span>SCHEDULE</span></a></li>
+				<li><a id="#tab4" href="/Standings/TeamStandings.aspx" class="depth_04"><span>STANDINGS</span></a></li>
+				<li class="last"><a id="#tab5" href="/stats/BattingTop5.aspx" class="depth_05"><span>STATS</span></a></li>
+			</ul>
+		</div> <!--//gnb -->
+	</div> <!--//header_top -->
+	<div class="gnb_sub tabContainer">
+		<div id="tab1" class="subarea tab-cont">
+			<ul>
+				<li><a href="/About/aboutkbo.aspx" class="about_01"><span>About KBO</span></a></li>
+				
+				<li class="last"><a href="/About/KBOProcedures.aspx" class="about_03"><span>KBO Procedures</span></a></li>
+				<!--<li class="last"><a href="/About/Changes.aspx" class="about_04"><span>Changes in 2015</span></a></li>-->
+			</ul>
+		</div> <!--//subarea -->
+		<div id="tab2" class="subarea tab-cont">
+			<ul>
+				<li><a href="/Teams/TeamInformation.aspx" class="team_01"><span>Team Information</span></a></li>
+				<li class="last"><a href="/Teams/PlayerSearch.aspx" class="team_02"><span>Player Search</span></a></li>
+			</ul>
+		</div> <!--//subarea -->
+		<div id="tab3" class="subarea tab-cont">
+			<ul>
+				<li><a href="/Schedule/Scoreboard.aspx" class="schedule_01"><span>Scoreboard</span></a></li>
+				<li class="last"><a href="/Schedule/DailySchedule.aspx" class="schedule_02"><span>Daily Schedule</span></a></li>
+			</ul>
+		</div> <!--//subarea -->
+		<div id="tab4" class="subarea tab-cont">
+			<ul>
+				<li class="last"><a href="/Standings/TeamStandings.aspx" class="standing_01"><span>Team Standings</span></a></li>
+			</ul>
+		</div> <!--//subarea -->
+		<div  id="tab5" class="subarea tab-cont">
+			<ul>
+				<li><a href="/stats/BattingTop5.aspx" class="stats_01 active"><span>Batting Top5</span></a></li>
+				<li><a href="/stats/PitchingTop5.aspx" class="stats_02"><span>Pitching Top5</span></a></li>
+				<li><a href="/stats/BattingLeaders.aspx" class="stats_03"><span>Batting Leaders</span></a></li>
+				<li><a href="/stats/PitchingLeaders.aspx" class="stats_04"><span>Pitching Leaders</span></a></li>
+				<li><a href="/stats/BattingByTeams.aspx" class="stats_05"><span>Batting By Teams</span></a></li>
+				<li><a href="/stats/PitchingByTeams.aspx" class="stats_06"><span>Pitching By Teams</span></a></li>
+				<li class="last"><a href="/stats/TeamStats.aspx" class="stats_07"><span>Team Stats</span></a></li>
+			</ul>
+		</div> <!--//subarea -->
+	</div> <!--//gnb_sub -->
+</div> <!--//header -->
+
+        
+
+<div id="container">
+	
+<div id="lnb">
+	<h2 class="schedule"><span>schedule</span></h2>
+	<ul>
+		<li><a id="lnb0301" href="/Schedule/Scoreboard.aspx" class="lnb_schedule_01"><span>score board</span></a></li>
+		<li><a id="lnb0302" href="/Schedule/DailySchedule.aspx" class="lnb_schedule_02"><span>daily schedule</span></a></li>
+	</ul>
+</div> <!--//lnb -->
+
+<div id="contents">
+	<div class="tit_sub">
+		<div class="nav">
+			<ul>
+				<li class="home"><a href="/Default.aspx"><span>HOME</span></a> <span class="arrow">&gt;</span></li>
+				<li><a href="/Schedule/Scoreboard.aspx"><span>SCHEDULE</span></a> <span class="arrow">&gt;</span></li>
+				<li class="last"><a href="/Schedule/Scoreboard.aspx"><span>Scoreboard</span></a></li>
+			</ul>
+		</div>
+		<h3 class="schedule01"><span>Scoreboard</span></h3>
+	</div>
+	<div class="inner"> 
+		<div class="standing_day cal_only uifix">
+			<div class="datearea">
+                <input type="image" name="ctl00$ctl00$ctl00$ctl00$cphContainer$cphContainer$cphContent$cphContent$btnBefore" id="cphContainer_cphContainer_cphContent_cphContent_btnBefore" class="prev" alt="이전" src="https://lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/btn_cal_prev.png" />
+                <div class="today">
+                        <span style="cursor:pointer" class="calendar">
+                            <input name="ctl00$ctl00$ctl00$ctl00$cphContainer$cphContainer$cphContent$cphContent$txtSearchDate" type="text" value="2023.10.11(WED)" readonly="readonly" id="cphContainer_cphContainer_cphContent_cphContent_txtSearchDate" title="날짜" style="border-width:0px;font-size:14px;height:30px;width:115px;" />
+                            <input name="ctl00$ctl00$ctl00$ctl00$cphContainer$cphContainer$cphContent$cphContent$txtCalendarDate" type="text" readonly="readonly" id="cphContainer_cphContainer_cphContent_cphContent_txtCalendarDate" title="날짜" style="border-width:0px;width:0px;" />
+                        </span>
+                </div>
+                <input type="image" name="ctl00$ctl00$ctl00$ctl00$cphContainer$cphContainer$cphContent$cphContent$btnNext" id="cphContainer_cphContainer_cphContent_cphContent_btnNext" class="next" alt="다음" src="https://lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/btn_cal_next.png" />
+            </div>
+		</div> <!--//standing day -->
+        <div class="scoreboard_local">
+			<span class="local_time"></span>
+		</div> 
+        
+	        <!-- score none -->
+	        <!-- //score none -->
+		    <div class="scoreboard_time">
+			    <img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/2023/ebl_h31_OB.png" alt="lotte" />
+			    <span class="team_name">DOOSAN</span>
+			    <span class="team_score"><span id="cphContainer_cphContainer_cphContent_cphContent_rptGameList_lblAwayTeamScore_0">3</span></span>
+                <span class="timer"><span id="cphContainer_cphContainer_cphContent_cphContent_rptGameList_lblGameState_0">FINAL</span></span>
+
+			    <span class="team_score"><span id="cphContainer_cphContainer_cphContent_cphContent_rptGameList_lblHomeTeamScore_0">14</span></span>
+			    <span class="team_name">LOTTE</span>
+			    <img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/2023/ebl_h31_LT.png" alt="doosan" />
+		    </div>
+
+		    <div class="scoreboard_local">
+			    <span class="local_time">SAJIK 18:30</span>
+                
+                <span class='local_w'>W: PARK Se Woong</span><span class='local_l'>L: CHOI Won Joon</span>
+		    </div>
+
+		    <div class="tbl_common tbl_scoreboard">
+			    <table summary="scoreboard">
+				    <colgroup>
+					    <col style="width:auto;" />
+				    </colgroup>
+				    <thead>
+					    <tr>
+						    <th scope="col"><span>TEAM</span></th>
+						    <th scope="col"><span>1</span></th>
+						    <th scope="col"><span>2</span></th>
+						    <th scope="col"><span>3</span></th>
+						    <th scope="col"><span>4</span></th>
+						    <th scope="col"><span>5</span></th>
+						    <th scope="col"><span>6</span></th>
+						    <th scope="col"><span>7</span></th>
+						    <th scope="col"><span>8</span></th>
+						    <th scope="col"><span>9</span></th>
+						    <th scope="col"><span>10</span></th>
+						    <th scope="col"><span>11</span></th>
+						    <th scope="col"><span>12</span></th>
+						    <th scope="col"><span>13</span></th>
+						    <th scope="col"><span>14</span></th>
+						    <th scope="col"><span>15</span></th>
+							
+
+						    <th scope="col"><span>R</span></th>
+						    <th scope="col"><span>H</span></th>
+						    <th scope="col"><span>E</span></th>
+						    <th scope="col"><span>B</span></th>
+					    </tr>
+				    </thead>
+                    <tbody>
+                        
+					        <tr>
+						        <th scope="row">DOOSAN</th>
+						        <td>1</td>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>1</td>
+						        <td>1</td>
+
+						        <td>0</td>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>-</td>
+
+						        <td>-</td>
+							    <td>-</td>
+						        <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+								
+
+						        <td class="point">3</td>
+						        <td class="hit">7</td>
+						        <td class="hit">1</td>
+						        <td class="hit">3</td>
+					        </tr>
+					    
+					        <tr>
+						        <th scope="row">LOTTE</th>
+						        <td>1</td>
+						        <td>2</td>
+						        <td>2</td>
+						        <td>3</td>
+						        <td>0</td>
+
+						        <td>3</td>
+						        <td>1</td>
+						        <td>2</td>
+						        <td>-</td>
+						        <td>-</td>
+
+						        <td>-</td>
+							    <td>-</td>
+						        <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+								
+
+						        <td class="point">14</td>
+						        <td class="hit">17</td>
+						        <td class="hit">0</td>
+						        <td class="hit">11</td>
+					        </tr>
+					    
+				    </tbody>
+			    </table>
+		    </div> <!--//tbl_common -->
+        
+	        <!-- score none -->
+	        <!-- //score none -->
+		    <div class="scoreboard_time">
+			    <img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/2023/ebl_h31_WO.png" alt="lotte" />
+			    <span class="team_name">KIWOOM</span>
+			    <span class="team_score"><span id="cphContainer_cphContainer_cphContent_cphContent_rptGameList_lblAwayTeamScore_1">0</span></span>
+                <span class="timer"><span id="cphContainer_cphContainer_cphContent_cphContent_rptGameList_lblGameState_1">FINAL</span></span>
+
+			    <span class="team_score"><span id="cphContainer_cphContainer_cphContent_cphContent_rptGameList_lblHomeTeamScore_1">11</span></span>
+			    <span class="team_name">KIA</span>
+			    <img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/2023/ebl_h31_HT.png" alt="doosan" />
+		    </div>
+
+		    <div class="scoreboard_local">
+			    <span class="local_time">GWANGJU 18:30</span>
+                
+                <span class='local_w'>W: YANG Hyeon Jong</span><span class='local_l'>L: LEE Jong Min</span>
+		    </div>
+
+		    <div class="tbl_common tbl_scoreboard">
+			    <table summary="scoreboard">
+				    <colgroup>
+					    <col style="width:auto;" />
+				    </colgroup>
+				    <thead>
+					    <tr>
+						    <th scope="col"><span>TEAM</span></th>
+						    <th scope="col"><span>1</span></th>
+						    <th scope="col"><span>2</span></th>
+						    <th scope="col"><span>3</span></th>
+						    <th scope="col"><span>4</span></th>
+						    <th scope="col"><span>5</span></th>
+						    <th scope="col"><span>6</span></th>
+						    <th scope="col"><span>7</span></th>
+						    <th scope="col"><span>8</span></th>
+						    <th scope="col"><span>9</span></th>
+						    <th scope="col"><span>10</span></th>
+						    <th scope="col"><span>11</span></th>
+						    <th scope="col"><span>12</span></th>
+						    <th scope="col"><span>13</span></th>
+						    <th scope="col"><span>14</span></th>
+						    <th scope="col"><span>15</span></th>
+							
+
+						    <th scope="col"><span>R</span></th>
+						    <th scope="col"><span>H</span></th>
+						    <th scope="col"><span>E</span></th>
+						    <th scope="col"><span>B</span></th>
+					    </tr>
+				    </thead>
+                    <tbody>
+                        
+					        <tr>
+						        <th scope="row">KIWOOM</th>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>0</td>
+
+						        <td>0</td>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>-</td>
+
+						        <td>-</td>
+							    <td>-</td>
+						        <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+								
+
+						        <td class="point">0</td>
+						        <td class="hit">7</td>
+						        <td class="hit">4</td>
+						        <td class="hit">0</td>
+					        </tr>
+					    
+					        <tr>
+						        <th scope="row">KIA</th>
+						        <td>0</td>
+						        <td>6</td>
+						        <td>1</td>
+						        <td>0</td>
+						        <td>4</td>
+
+						        <td>0</td>
+						        <td>0</td>
+						        <td>0</td>
+						        <td>-</td>
+						        <td>-</td>
+
+						        <td>-</td>
+							    <td>-</td>
+						        <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+								
+
+						        <td class="point">11</td>
+						        <td class="hit">9</td>
+						        <td class="hit">0</td>
+						        <td class="hit">8</td>
+					        </tr>
+					    
+				    </tbody>
+			    </table>
+		    </div> <!--//tbl_common -->
+        
+    
+	</div> <!--//inner -->
+</div> <!--//contents -->
+
+
+</div> <!--//container -->
+
+
+        
+
+<div id="footer">
+	<div class="kbo_home">
+		<a href="/Default.aspx" title="kbo homepage"><span>KBO</span></a>
+	</div>
+	<div class="ebl">
+		<ul>
+			<li><a href="http://www.ssglanders.com" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_SK.png" alt="" /></a></li>
+			<li><a href="http://www.heroesbaseball.co.kr" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_WO.png" alt="" /></a></li>
+			<li><a href="http://www.lgtwins.com" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_LG.png" alt="" /></a></li>
+			<li><a href="http://ktwiz.co.kr"  class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_KT.png" alt="" /></a></li>
+			<li><a href="http://www.tigers.co.kr" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_HT.png" alt="" /></a></li>
+			<li><a href="http://www.ncdinos.com" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_NC.png" alt="" /></a></li>
+			<li><a href="http://www.samsunglions.com" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_SS.png" alt="" /></a></li>
+            <li><a href="http://www.giantsclub.com" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_LT.png" alt="" /></a></li>
+			<li><a href="http://www.doosanbears.com" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_OB.png" alt="" /></a></li>
+			<li class="last"><a href="http://www.hanwhaeagles.co.kr" class="" target="_blank" title="link title"><img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/ebl/regular/fixed/ebl_ft_HH.png" alt="" /></a></li>        
+		</ul>
+		<p>&copy; Korea Baseball Organization, 278 Gangnam-daero, Gangnam-gu, Seoul, Korea 06258 TEL 02) 3460-4600</p>
+		<p>This is the official KBO website for our fans operated by sports2i co. LTD. </p>
+		<p>
+			Copyright&copy; 2010~2016 KBO. All rights reserved.
+			<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/ico_w3c.png" alt="W3C 웹표준XHTML 1.0 Transitional준수" />
+		</p>
+	</div> <!--//ebl -->
+	<div class="verisign">
+		<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/eng/resources/images/common/ico_verisign.png" alt="" />
+	</div>
+</div> <!--//footer -->
+
+
+    </form>
+</body>
+</html>

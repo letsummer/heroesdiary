@@ -1,0 +1,25 @@
+doctype html
+html(lang="ko")
+    style
+        include ../../styles/calendar.css
+        link(rel="stylesheet", href="../../styles/calendar.css")
+    div.calendarbody
+        div.wrapper
+            header
+                p.current-date
+                div.icons
+                    span.material-symbols-outlined#prev chevron_left
+                    //- span#prev.material-symbols-rounded
+                    span.material-symbols-outlined#post chevron_right
+            div.calendar
+                ul.weeks
+                    li Sun
+                    li Mon
+                    li Tue
+                    li Wed
+                    li Thu
+                    li Fri
+                    li Sat
+                ul.days
+    script
+            include ../../scripts/calendar.js

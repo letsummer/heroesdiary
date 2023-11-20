@@ -1,0 +1,7 @@
+mixin diarytitle(info)
+    div
+        h4 
+            //- a(href=`diary/${info.id}`)=info.id
+            a(href=`diary/${info.id}`)=info.id
+        ul
+            li #{info.content}

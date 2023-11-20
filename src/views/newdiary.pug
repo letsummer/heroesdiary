@@ -1,0 +1,163 @@
+extends layouts/layout.pug
+block style 
+    style
+        include ../styles/diary.css
+block content
+    span.material-symbols-outlined.btnClose close
+    //- h1=result.gameId
+    h1
+        header
+            div 
+                span.material-symbols-outlined#prevDate chevron_left
+                span#today #{id}
+                span.material-symbols-outlined#postDate chevron_right
+    form(method="POST", action=`/diary/${id}`, enctype="multipart/form-data")
+        //- input(type="submit", value="Upload")
+        div.info
+            table
+                tr
+                    td#infotitle STADIUM
+                        select(class="stadium", name="stadium")
+                            option(value="고척", selected= result.stadium =="고척" ? true : null) 고척스카이돔
+                            option(value="문학", selected= result.stadium =="문학" ? true : null) 인천SSG랜더스필드
+                            option(value="잠실", selected= result.stadium =="잠실" ? true : null) 잠실야구장
+                            option(value="수원", selected= result.stadium =="수원" ? true : null) 수원KT위즈파크
+                            option(value="대전", selected= result.stadium =="대전" ? true : null) 한화생명이글스파크
+                            option(value="대구", selected= result.stadium =="대구" ? true : null) 대구삼성라이온즈파크
+                            option(value="광주", selected= result.stadium =="광주" ? true : null) 기아챔피언스필드
+                            option(value="사직", selected= result.stadium =="사직" ? true : null) 사직야구장
+                            option(value="창원", selected= result.stadium =="창원" ? true : null) 창원NC파크
+                    td#infotitle TIME
+                    td.gametime
+                        input(type="text" value="")
+                        span  : 
+                        input(type="text" value="")
+                    td#infotitle WATCH
+                    td
+                        label
+                            input(class="watch", type="radio", name="watch", value="ticket")
+                            i(class="fa-solid fa-ticket")
+                        label
+                            input(class="watch", type="radio", name="watch", value="home")
+                            i(class="fa-solid fa-tv")
+                tr 
+                    td#infotitle WEATHER
+                    td 
+                        label
+                            input(class="weather", value="sunny", type="radio", name="weather")
+                            i(class="fa-regular fa-sun")
+                        label
+                            input(class="weather", value="cloudy" type="radio", name="weather")
+                            i(class="fa-solid fa-cloud")
+                        label    
+                            input(class="weather", value="windy", type="radio", name="weather")
+                            i(class="fa-solid fa-wind")
+                        label
+                            input(class="weather", value="rainy", type="radio", name="weather")
+                            i(class="fa-solid fa-umbrella")
+                    td#infotitle MOOD
+                    td
+                        label
+                            input(class="mood", type="radio", value="lucky", name="mood")
+                            i(class="fa-regular fa-face-grin-stars")
+                        label
+                            input(class="mood", type="radio", value="happy", name="mood")
+                            i(class="fa-regular fa-face-laugh-beam")
+                        label
+                            input(class="mood", type="radio", value="notbad", name="mood")
+                            i(class="fa-regular fa-face-smile")
+                        label
+                            input(class="mood", type="radio", value="bad", name="mood")
+                            i(class="fa-regular fa-face-frown")
+                        label
+                            input(class="mood", type="radio", value="angry", name="mood")
+                            i(class="fa-regular fa-face-angry")
+                        label
+                            input(class="mood", type="radio", value="angel", name="mood")
+                            i(class="fa-regular fa-face-grin-tears")
+        div.middle
+            div.lineup
+                h5 LINE-UP
+                    ol
+                        li
+                            input(type="text", name="lineup")
+                        li
+                            input(type="text", name="lineup")
+                        li
+                            input(type="text", name="lineup")
+                        li
+                            input(type="text", name="lineup")
+                        li
+                            input(type="text", name="lineup")
+                        li
+                            input(type="text", name="lineup")
+                        li
+                            input(type="text", name="lineup")
+                        li
+                            input(type="text", name="lineup")
+                        li
+                            input(type="text", name="lineup")
+                    ul
+                        li
+                            input(type="text", name="lineup", value=result.homeTeamCode=="WO"?result.homeStarterName:result.awayStarterName)  
+            div.game
+                div#team
+                    h5 GAME
+                    table
+                        tr
+                            if(result.cancel==true)
+                                td 경기취소
+                            else
+                                td=result.awayTeamName
+                                td
+                                    input(type="number", name="score_away", value=result.awayTeamRheb[0])
+                                td VS
+                                td 
+                                    input(type="number", name="score_home", value=result.homeTeamRheb[0])
+                                td=result.homeTeamName
+                h5 SCOREBORED
+                div#scorebored
+                    table
+                        thead
+                            each header in ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "H", "E", "B"]
+                                td=header
+                        tbody
+                            tr
+                                td=result.awayTeamName
+                                each asc in result.awayTeamScoreByInning
+                                    if(asc!=null)
+                                       td=asc
+                                - for(let i=0; i<12-result.awayTeamScoreByInning.length ; i++)
+                                    td="-"
+                                - for(let i=1 ; i<result.awayTeamRheb.length; i++)
+                                    td=result.awayTeamRheb[i]
+                            tr
+                                td=result.homeTeamName
+                                each hsc in result.homeTeamScoreByInning
+                                    if(hsc!=null)
+                                       td=hsc
+                                - for(let i=0; i<12-result.homeTeamScoreByInning.length ; i++)
+                                    td="-"
+                                - for(let i=1 ; i<result.homeTeamRheb.length; i++)
+                                    td=result.homeTeamRheb[i]
+                main
+                    h5=testData
+                    //- h5 today... 
+                    textarea(name="content", cols="30", rows="10")
+            div#ticket
+                h5 TICKET
+                div#ticketcase
+                    input(type="file", class="fileupload", name="ticket", accept="image/*")
+                //- div
+                //-     h5 TICKET
+                //-     input(type="file", id="ticket", name="ticket", accept="image/*")
+                //- //- if diary && diary.ticketUrl
+                //- //-     img(src= diary.ticketUrl, width="250")
+                //- div#ticketcase
+        button(type="submit").btnUp.btn upload
+        script
+            include ../scripts/diaryjs.js
+            //- include ../scripts/fetch.js
+            include ../scripts/scoreboard.js
+
+            //- include ../scripts/test.js

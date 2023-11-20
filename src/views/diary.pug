@@ -1,0 +1,158 @@
+extends layouts/layout.pug
+block style 
+    style
+        include ../styles/diary.css
+block content 
+    span.material-symbols-outlined.btnClose close
+    h1 
+        header
+            div 
+                span.material-symbols-outlined#prevDate chevron_left
+                span#today #{id}
+                span.material-symbols-outlined#postDate chevron_right
+    form(method="POST", action=`/diary/${id}`, enctype="multipart/form-data")
+        div.info
+            table
+                tr
+                    td#infotitle STADIUM
+                        select(class="stadium", name="stadium")
+                            option(value="고척", selected= diary.stadium =="고척" ? true : null) 고척스카이돔
+                            option(value="문학", selected= diary.stadium =="문학" ? true : null) 인천SSG랜더스필드
+                            option(value="잠실", selected= diary.stadium =="잠실" ? true : null) 잠실야구장
+                            option(value="수원", selected= diary.stadium =="수원" ? true : null) 수원KT위즈파크
+                            option(value="대전", selected= diary.stadium =="대전" ? true : null) 한화생명이글스파크
+                            option(value="대구", selected= diary.stadium =="대구" ? true : null) 대구삼성라이온즈파크
+                            option(value="광주", selected= diary.stadium =="광주" ? true : null) 기아챔피언스필드
+                            option(value="사직", selected= diary.stadium =="사직" ? true : null) 사직야구장
+                            option(value="창원", selected= diary.stadium =="창원" ? true : null) 창원NC파크
+                        
+                    td#infotitle TIME
+                        div.gametime
+                            input(type="text")
+                            span  : 
+                            input(type="text")
+                    td#infotitle WATCH
+                        div
+                            label
+                                input(class="watch", type="radio", name="watch", value="ticket", checked= diary.watch =="ticket" ? true : null)
+                                i(class="fa-solid fa-ticket")
+                            label
+                                input(class="watch", type="radio", name="watch", value="home", checked= diary.watch =="home" ? true : null)
+                                i(class="fa-solid fa-tv")
+                tr 
+                    td#infotitle WEATHER
+                        div 
+                            label
+                                input(class="weather", value="sunny", type="radio", name="weather", checked= diary.weather =="sunny" ? true : null)
+                                i(class="fa-regular fa-sun")
+                            label
+                                input(class="weather", value="cloudy" type="radio", name="weather", checked= diary.weather =="cloudy" ? true : null)
+                                i(class="fa-solid fa-cloud")
+                            label    
+                                input(class="weather", value="windy", type="radio", name="weather", checked= diary.weather =="windy" ? true : null)
+                                i(class="fa-solid fa-wind")
+                            label
+                                input(class="weather", value="rainy", type="radio", name="weather", checked= diary.weather =="rainy" ? true : null)
+                                i(class="fa-solid fa-umbrella")
+                    td#infotitle MOOD
+                        div
+                            label
+                                input(class="mood", type="radio", value="lucky", name="mood", checked= diary.mood =="lucky" ? true : null)
+                                i(class="fa-regular fa-face-grin-stars")
+                            label
+                                input(class="mood", type="radio", value="happy", name="mood", checked= diary.mood =="happy" ? true : null)
+                                i(class="fa-regular fa-face-laugh-beam")
+                            label
+                                input(class="mood", type="radio", value="notbad", name="mood", checked= diary.mood =="notbad" ? true : null)
+                                i(class="fa-regular fa-face-smile")
+                            label
+                                input(class="mood", type="radio", value="bad", name="mood", checked= diary.mood =="bad" ? true : null)
+                                i(class="fa-regular fa-face-frown")
+                            label
+                                input(class="mood", type="radio", value="angry", name="mood", checked= diary.mood =="angry" ? true : null)
+                                i(class="fa-regular fa-face-angry")
+                            label
+                                input(class="mood", type="radio", value="angel", name="mood", checked= diary.mood =="angel" ? true : null)
+                                i(class="fa-regular fa-face-grin-tears")
+        div.middle
+            div.lineup
+                h5 LINE-UP
+                    ol#list
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[0])
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[1])
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[2])
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[3])
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[4])
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[5])
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[6])
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[7])
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[8])
+                    ul
+                        li
+                            input(type="text", name="lineup", value= diary.lineup[9])
+            div.game
+                div#team
+                    h5 GAME
+                    table
+                        tr
+                            if(result.cancel==true)
+                                td 경기취소
+                            else
+                                td=result.awayTeamName
+                                td
+                                    input(type="number", name="score_away", value=result.awayTeamRheb[0])
+                                td VS
+                                td 
+                                    input(type="number", name="score_home", value=result.homeTeamRheb[0])
+                                td=result.homeTeamName
+                h5 SCOREBORED
+                div#scorebored
+                    table
+                        thead
+                            each header in ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "H", "E", "B"]
+                                td=header
+                        tbody
+                            tr
+                                td=result.awayTeamName
+                                each asc in result.awayTeamScoreByInning
+                                    if(asc!=null)
+                                       td=asc
+                                - for(let i=0; i<12-result.awayTeamScoreByInning.length ; i++)
+                                    td="-"
+                                - for(let i=1 ; i<result.awayTeamRheb.length; i++)
+                                    td=result.awayTeamRheb[i]
+                            tr
+                                td=result.homeTeamName
+                                each hsc in result.homeTeamScoreByInning
+                                    if(hsc!=null)
+                                       td=hsc
+                                - for(let i=0; i<12-result.homeTeamScoreByInning.length ; i++)
+                                    td="-"
+                                - for(let i=1 ; i<result.homeTeamRheb.length; i++)
+                                    td=result.homeTeamRheb[i]
+                main
+                    h5 #{testData}
+                    h5 today...
+                    textarea(name="content", cols="30", rows="10")=diary.content
+            div#ticket
+                h5 TICKET
+                if diary.ticketUrl
+                    div
+                        input(type="file", class="fileupload", name="ticket", accept="image/*")
+                        img(src= diary.ticketUrl, width="250")
+                else    
+                    div#ticketcase
+                        input(type="file", class="fileupload", name="ticket", accept="image/*")
+        button(type="submit").btnUp.btn upload
+        script
+            include ../scripts/diaryjs.js
+            //- include ../scripts/test.js

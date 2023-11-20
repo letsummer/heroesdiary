@@ -1,0 +1,12 @@
+data = [{
+  "countries":[
+    {
+      "name":"Indonesia",
+      "capital":"Jakarta"
+    },
+    {
+      "name":"Phillippines",
+      "capital":"Manila"
+    }
+  ]
+}]
