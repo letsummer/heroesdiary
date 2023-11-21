@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import User from "../models/User.js";
 
 export const getJoin = (req, res) => res.render("join", {pageTitle: "Join"});
@@ -35,11 +36,18 @@ export const getLogin = (req, res) => res.render("login", {
 
 export const postLogin = async (req, res) => {
     const {email, password} = req.body;
-    const exists = await User.exists({email});
-    if(!exists){
+    const userId = await User.findOne({email});
+    if(!userId){
         return res.status(400).render("login", {
             errorMessage: "존재하지 않는 이메일입니다.",
-        })
+        });
     }
-    res.end();
+    const ok = await bcrypt.compare(password, userId.password);
+    if(!ok){
+        return res.status(400).render("login", {
+            errorMessage: "비밀번호를 확인해주세요.",
+        });
+    }
+    console.log("LOGGED IN!");
+    return res.redirect("/");
 }
