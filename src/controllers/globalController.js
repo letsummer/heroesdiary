@@ -42,6 +42,3 @@ export const home = async (req, res) => {
     return res.render("home", {pageTitle: "Home", name});
 }
 
-export const join = (req, res) => res.render("join", {pageTitle: "Join"});
-
-export const login = (req, res) => res.render("login", {pageTitle: "Login"});

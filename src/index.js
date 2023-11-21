@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import globalRouter from "./routers/globalRouter.js";
+import rootRouter from "./routers/rootRouter.js";
 import diaryRouter from "./routers/diaryRouter.js";
 
 const app = express();
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use("/", handleTest);
 app.use(express.static('public'));
 app.use("/uploads", express.static("uploads"));
-app.use("/", globalRouter);
+app.use("/", rootRouter);
 app.use("/diary", diaryRouter);
 
 app.get('*', function(req, res){
