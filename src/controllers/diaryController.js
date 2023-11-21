@@ -70,7 +70,7 @@ export const getEdit = async (req, res) => {
     console.log(`###url: ${url}`);
     
     if(url == undefined)
-        return res.render("404");
+        return res.status(404).render("404");
     else{
         axios.get(url)
         .then((urlRes)=>{

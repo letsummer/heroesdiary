@@ -129,7 +129,7 @@ var getEdit = exports.getEdit = /*#__PURE__*/function () {
             _context3.next = 12;
             break;
           }
-          return _context3.abrupt("return", res.render("404"));
+          return _context3.abrupt("return", res.status(404).render("404"));
         case 12:
           axios.get(url).then(function (urlRes) {
             // console.log(`###url.data.result.game.gameId: ${ares.data.result.game.gameId}`);

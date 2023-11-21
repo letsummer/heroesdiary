@@ -17,27 +17,55 @@ var getJoin = exports.getJoin = function getJoin(req, res) {
 };
 var postJoin = exports.postJoin = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _req$body, name, username, email, password, location;
+    var _req$body, username, email, password, password2, location, emailExists;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           console.log(req.body);
-          _req$body = req.body, name = _req$body.name, username = _req$body.username, email = _req$body.email, password = _req$body.password, location = _req$body.location;
-          _context.next = 4;
+          _req$body = req.body, username = _req$body.username, email = _req$body.email, password = _req$body.password, password2 = _req$body.password2, location = _req$body.location;
+          if (!(password !== password2)) {
+            _context.next = 4;
+            break;
+          }
+          return _context.abrupt("return", res.status(400).render("join", {
+            errorMessage: "패스워드가 일치하지 않습니다."
+          }));
+        case 4:
+          _context.next = 6;
+          return _User["default"].exists({
+            email: email
+          });
+        case 6:
+          emailExists = _context.sent;
+          if (!emailExists) {
+            _context.next = 9;
+            break;
+          }
+          return _context.abrupt("return", res.status(400).render("join", {
+            errorMessage: "이미 존재하는 email 입니다."
+          }));
+        case 9:
+          _context.prev = 9;
+          _context.next = 12;
           return _User["default"].create({
-            name: name,
             username: username,
             email: email,
             password: password,
             location: location
           });
-        case 4:
+        case 12:
           return _context.abrupt("return", res.redirect("/login"));
-        case 5:
+        case 15:
+          _context.prev = 15;
+          _context.t0 = _context["catch"](9);
+          return _context.abrupt("return", res.status(400).render("join", {
+            errorMessage: _context.t0._message
+          }));
+        case 18:
         case "end":
           return _context.stop();
       }
-    }, _callee);
+    }, _callee, null, [[9, 15]]);
   }));
   return function postJoin(_x, _x2) {
     return _ref.apply(this, arguments);
