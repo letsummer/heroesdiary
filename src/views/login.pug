@@ -1,3 +1,12 @@
 extends layouts/layout.pug 
 block content 
-    h1 Login page
+    if errorMessage
+        span=errorMessage
+    form(action="", method="post") 
+        input(placeholder="Email", name="email", type="email", required)
+        input(placeholder="Password", name="password", type="password", required)
+        input(type="submit", value="Login")
+    hr
+    div
+        span 계정이 없으신가요? 
+        a(href="/join") 회원가입 &rarr; 

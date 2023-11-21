@@ -30,4 +30,16 @@ export const postJoin = async (req, res) => {
     }
 };
 
-export const login = (req, res) => res.render("login", {pageTitle: "Login"});
+export const getLogin = (req, res) => res.render("login", {
+    pageTitle: "Login"});
+
+export const postLogin = async (req, res) => {
+    const {email, password} = req.body;
+    const exists = await User.exists({email});
+    if(!exists){
+        return res.status(400).render("login", {
+            errorMessage: "존재하지 않는 이메일입니다.",
+        })
+    }
+    res.end();
+}
