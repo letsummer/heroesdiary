@@ -24,7 +24,7 @@ app.use(session({
     cookie:{
         // maxAge: 20000,
     },
-    store: MongoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/todaybaseball"}), 
+    store: MongoStore.create({mongoUrl: process.env.DB_URL}), 
     })
 );
 

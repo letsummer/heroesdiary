@@ -32,7 +32,7 @@ app.use((0, _expressSession["default"])({
     // maxAge: 20000,
   },
   store: _connectMongo["default"].create({
-    mongoUrl: "mongodb://127.0.0.1:27017/todaybaseball"
+    mongoUrl: process.env.DB_URL
   })
 }));
 
