@@ -54,3 +54,8 @@ export const postLogin = async (req, res) => {
     console.log(`### req.body.username: ${user.username}`);
     return res.redirect("/");
 }
+
+export const logout = (req, res) =>{
+    req.session.destroy();
+    return res.redirect("/");
+};

@@ -10,6 +10,7 @@ var _userController = require("../controllers/userController.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var rootRouter = _express["default"].Router();
 rootRouter.get("/", _globalController.home);
+rootRouter.get("/logout", _userController.logout);
 rootRouter.route("/join").get(_userController.getJoin).post(_userController.postJoin);
 rootRouter.route("/login").get(_userController.getLogin).post(_userController.postLogin);
 var _default = exports["default"] = rootRouter;

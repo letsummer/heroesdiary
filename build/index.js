@@ -7,6 +7,7 @@ exports["default"] = void 0;
 var _express = _interopRequireDefault(require("express"));
 var _morgan = _interopRequireDefault(require("morgan"));
 var _expressSession = _interopRequireDefault(require("express-session"));
+var _connectMongo = _interopRequireDefault(require("connect-mongo"));
 var _rootRouter = _interopRequireDefault(require("./routers/rootRouter.js"));
 var _diaryRouter = _interopRequireDefault(require("./routers/diaryRouter.js"));
 var _middlewares = require("./middlewares.js");
@@ -25,8 +26,14 @@ app.use(_express["default"].urlencoded({
 
 app.use((0, _expressSession["default"])({
   secret: "Hello!",
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    // maxAge: 20000,
+  },
+  store: _connectMongo["default"].create({
+    mongoUrl: "mongodb://127.0.0.1:27017/todaybaseball"
+  })
 }));
 
 // app.get("/add-one", (req, res, next)=>{

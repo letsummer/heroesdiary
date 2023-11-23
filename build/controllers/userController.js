@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.postLogin = exports.postJoin = exports.getLogin = exports.getJoin = void 0;
+exports.postLogin = exports.postJoin = exports.logout = exports.getLogin = exports.getJoin = void 0;
 var _bcrypt = _interopRequireDefault(require("bcrypt"));
 var _User = _interopRequireDefault(require("../models/User.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -125,3 +125,7 @@ var postLogin = exports.postLogin = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+var logout = exports.logout = function logout(req, res) {
+  req.session.destroy();
+  return res.redirect("/");
+};
