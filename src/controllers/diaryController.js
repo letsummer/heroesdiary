@@ -1,5 +1,5 @@
 import Diary from "../models/Diary.js";
-import "../middleware.js";
+import "../middlewares.js";
 
 
 const handleSearch = (error, videos) =>{

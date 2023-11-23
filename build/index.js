@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _express = _interopRequireDefault(require("express"));
 var _morgan = _interopRequireDefault(require("morgan"));
+var _expressSession = _interopRequireDefault(require("express-session"));
 var _rootRouter = _interopRequireDefault(require("./routers/rootRouter.js"));
 var _diaryRouter = _interopRequireDefault(require("./routers/diaryRouter.js"));
+var _middlewares = require("./middlewares.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var app = (0, _express["default"])();
 app.set("view engine", "pug");
@@ -20,6 +22,18 @@ app.use(_express["default"].urlencoded({
 // const handleTest = (req,res)=> {return res.send("Hello!")};
 
 // app.use("/", handleTest);
+
+app.use((0, _expressSession["default"])({
+  secret: "Hello!",
+  resave: true,
+  saveUninitialized: true
+}));
+
+// app.get("/add-one", (req, res, next)=>{
+//     return res.send(`${req.session.id}`);
+// })
+
+app.use(_middlewares.localsMiddleware);
 app.use(_express["default"]["static"]('public'));
 app.use("/uploads", _express["default"]["static"]("uploads"));
 app.use("/", _rootRouter["default"]);

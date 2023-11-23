@@ -36,18 +36,21 @@ export const getLogin = (req, res) => res.render("login", {
 
 export const postLogin = async (req, res) => {
     const {email, password} = req.body;
-    const userId = await User.findOne({email});
-    if(!userId){
+    const user = await User.findOne({email});
+    if(!user){
         return res.status(400).render("login", {
             errorMessage: "존재하지 않는 이메일입니다.",
         });
     }
-    const ok = await bcrypt.compare(password, userId.password);
+    const ok = await bcrypt.compare(password, user.password);
     if(!ok){
         return res.status(400).render("login", {
             errorMessage: "비밀번호를 확인해주세요.",
         });
     }
-    console.log("LOGGED IN!");
+    req.session.loggedIn = true;
+    req.session.userId = user;
+    req.session.username = user.username
+    console.log(`### req.body.username: ${user.username}`);
     return res.redirect("/");
 }

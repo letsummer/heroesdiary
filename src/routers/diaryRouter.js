@@ -1,6 +1,6 @@
 import express from "express";
 import {list, getEdit, postEdit} from "../controllers/diaryController.js";
-import { uploadFiles } from "../middleware.js";
+import { uploadFiles } from "../middlewares.js";
 
 const diaryRouter = express.Router();
 

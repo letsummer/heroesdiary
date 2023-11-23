@@ -67,22 +67,13 @@ var testUrl = exports.testUrl = /*#__PURE__*/function () {
 }();
 var home = exports.home = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
-    var name, id, result;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          name = "I'm home!";
-          id = "20230909";
-          _context2.next = 4;
-          return testUrl(id);
-        case 4:
-          result = _context2.sent;
-          console.log("result: ".concat(result));
           return _context2.abrupt("return", res.render("home", {
-            pageTitle: "Home",
-            name: name
+            pageTitle: "Home"
           }));
-        case 7:
+        case 1:
         case "end":
           return _context2.stop();
       }

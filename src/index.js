@@ -1,7 +1,9 @@
 import express from "express";
 import morgan from "morgan";
+import session from "express-session";
 import rootRouter from "./routers/rootRouter.js";
 import diaryRouter from "./routers/diaryRouter.js";
+import {localsMiddleware} from "./middlewares.js";
 
 const app = express();
 
@@ -13,6 +15,20 @@ app.use(express.urlencoded({ extended: true }));
 // const handleTest = (req,res)=> {return res.send("Hello!")};
 
 // app.use("/", handleTest);
+
+app.use(session({
+    secret: "Hello!",
+    resave: true,
+    saveUninitialized: true,
+    })
+);
+
+
+// app.get("/add-one", (req, res, next)=>{
+//     return res.send(`${req.session.id}`);
+// })
+
+app.use(localsMiddleware);
 app.use(express.static('public'));
 app.use("/uploads", express.static("uploads"));
 app.use("/", rootRouter);

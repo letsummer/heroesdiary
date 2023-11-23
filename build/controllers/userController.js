@@ -79,7 +79,7 @@ var getLogin = exports.getLogin = function getLogin(req, res) {
 };
 var postLogin = exports.postLogin = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
-    var _req$body2, email, password, userId, ok;
+    var _req$body2, email, password, user, ok;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -89,8 +89,8 @@ var postLogin = exports.postLogin = /*#__PURE__*/function () {
             email: email
           });
         case 3:
-          userId = _context2.sent;
-          if (userId) {
+          user = _context2.sent;
+          if (user) {
             _context2.next = 6;
             break;
           }
@@ -99,7 +99,7 @@ var postLogin = exports.postLogin = /*#__PURE__*/function () {
           }));
         case 6:
           _context2.next = 8;
-          return _bcrypt["default"].compare(password, userId.password);
+          return _bcrypt["default"].compare(password, user.password);
         case 8:
           ok = _context2.sent;
           if (ok) {
@@ -110,8 +110,12 @@ var postLogin = exports.postLogin = /*#__PURE__*/function () {
             errorMessage: "비밀번호를 확인해주세요."
           }));
         case 11:
-          res.end();
-        case 12:
+          req.session.loggedIn = true;
+          req.session.userId = user;
+          req.session.username = user.username;
+          console.log("### req.body.username: ".concat(user.username));
+          return _context2.abrupt("return", res.redirect("/"));
+        case 16:
         case "end":
           return _context2.stop();
       }

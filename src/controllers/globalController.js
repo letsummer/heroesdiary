@@ -33,12 +33,12 @@ export const testUrl = async (id) => {
 }
 
 export const home = async (req, res) => {
-    const name = "I'm home!";
+    // const name = "I'm home!";
 
-    const id="20230909";
+    // const id="20230909";
 
-    const result = await testUrl(id);
-    console.log(`result: ${result}`);
-    return res.render("home", {pageTitle: "Home", name});
+    // const result = await testUrl(id);
+    // console.log(`result: ${result}`);
+    return res.render("home", {pageTitle: "Home"});
 }
 

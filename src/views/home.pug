@@ -2,9 +2,14 @@ extends layouts/layout.pug
 block style 
 block content
     h1 Welcome Baseball diary
+    if loggedIn
+        h5 #{loggedInUsername}님...그래도 히어로즈 사랑하시죠?
     a(href="/diary") go to diary
     h5=name
-    //- h1=result
-    a(href="/join") Join 
-    a(href="/login") Login 
+    if loggedIn
+        a(href="/") Logout 
+        a(href="/") Profile 
+    else
+        a(href="/join") Join 
+        a(href="/login") Login 
     
