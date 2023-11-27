@@ -34,18 +34,18 @@ var handleSearch = function handleSearch(error, videos) {
 
 var list = exports.list = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var id, diaries;
+    var _req$params, id, date, diaries;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          id = req.params.id;
+          _req$params = req.params, id = _req$params.id, date = _req$params.date;
           _context.next = 3;
           return _Diary["default"].find({});
         case 3:
           diaries = _context.sent;
           _context.prev = 4;
           console.log("hello");
-          console.log("###id: ".concat(id));
+          console.log("###date: ".concat(date));
           return _context.abrupt("return", res.render("diarylist", {
             diaries: diaries
           }));
@@ -66,7 +66,7 @@ var list = exports.list = /*#__PURE__*/function () {
 var axios = require("axios");
 var teams = ["WO", "SK", "LG", "OB", "KT", "HH", "SS", "HT", "LT", "NC"];
 var testUrl = exports.testUrl = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(id) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(date) {
     var i, url, url2;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
@@ -77,8 +77,8 @@ var testUrl = exports.testUrl = /*#__PURE__*/function () {
             _context2.next = 23;
             break;
           }
-          url = "https://api-gw.sports.naver.com/schedule/games/".concat(id, "WO").concat(teams[i], "0").concat(id.slice(0, 4));
-          url2 = "https://api-gw.sports.naver.com/schedule/games/".concat(id).concat(teams[i], "WO0").concat(id.slice(0, 4));
+          url = "https://api-gw.sports.naver.com/schedule/games/".concat(date, "WO").concat(teams[i], "0").concat(date.slice(0, 4));
+          url2 = "https://api-gw.sports.naver.com/schedule/games/".concat(date).concat(teams[i], "WO0").concat(date.slice(0, 4));
           _context2.prev = 4;
           _context2.next = 7;
           return axios.get(url);
@@ -111,20 +111,23 @@ var testUrl = exports.testUrl = /*#__PURE__*/function () {
 }();
 var getEdit = exports.getEdit = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
-    var id, diary, url;
+    var _id, _req$params2, id, date, diary, url;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          id = req.params.id;
-          _context3.next = 3;
-          return _Diary["default"].findById(id);
-        case 3:
+          _id = req.session.userId._id;
+          _req$params2 = req.params, id = _req$params2.id, date = _req$params2.date; // const diary = await Diary.findById('656437738bb9411d20cca79e');
+          _context3.next = 4;
+          return _Diary["default"].findOne({
+            owner: req.session.userId._id,
+            date: date
+          });
+        case 4:
           diary = _context3.sent;
-          _context3.next = 6;
-          return testUrl(id);
-        case 6:
+          _context3.next = 7;
+          return testUrl(date);
+        case 7:
           url = _context3.sent;
-          console.log("###url: ".concat(url));
           if (!(url == undefined)) {
             _context3.next = 12;
             break;
@@ -136,6 +139,7 @@ var getEdit = exports.getEdit = /*#__PURE__*/function () {
             var isDiary = diary ? "diary" : "newdiary";
             return res.render(isDiary, {
               id: id,
+              date: date,
               diary: diary,
               result: urlRes.data.result.game
             });
@@ -160,26 +164,29 @@ var getEdit = exports.getEdit = /*#__PURE__*/function () {
 
 var postEdit = exports.postEdit = /*#__PURE__*/function () {
   var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
-    var id, _req$body, date, stadium, watch, weather, mood, content, lineup, file, diary, dbDiary;
+    var _id, _req$params3, id, date, _req$body, stadium, watch, weather, mood, content, lineup, file, diary, dbDiary;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          id = req.params.id; // console.log(`id is ${id}`);
-          _req$body = req.body, date = _req$body.date, stadium = _req$body.stadium, watch = _req$body.watch, weather = _req$body.weather, mood = _req$body.mood, content = _req$body.content, lineup = _req$body.lineup, file = req.file; // console.dir(`###ticket: ${JSON.stringify(file.path)}`);
+          _id = req.session.userId._id;
+          _req$params3 = req.params, id = _req$params3.id, date = _req$params3.date;
+          console.log("id is ".concat(id));
+          _req$body = req.body, stadium = _req$body.stadium, watch = _req$body.watch, weather = _req$body.weather, mood = _req$body.mood, content = _req$body.content, lineup = _req$body.lineup, file = req.file; // console.dir(`###ticket: ${JSON.stringify(file.path)}`);
           console.log("###req.body: ".concat(JSON.stringify(req.body)));
           // console.log(`###req.lineup: ${JSON.stringify(lineup)}`);
-          _context4.next = 5;
+          _context4.next = 7;
           return _Diary["default"].findById(id);
-        case 5:
+        case 7:
           diary = _context4.sent;
           if (diary) {
-            _context4.next = 12;
+            _context4.next = 14;
             break;
           }
-          _context4.next = 9;
+          _context4.next = 11;
           return _Diary["default"].create({
-            _id: id,
-            date: id,
+            // _id: id,
+            owner: _id,
+            date: date,
             stadium: stadium,
             watch: watch,
             weather: weather,
@@ -188,13 +195,13 @@ var postEdit = exports.postEdit = /*#__PURE__*/function () {
             lineup: lineup,
             ticketUrl: file ? "/".concat(file.path) : ""
           });
-        case 9:
+        case 11:
           dbDiary = _context4.sent;
-          _context4.next = 15;
+          _context4.next = 17;
           break;
-        case 12:
-          _context4.next = 14;
-          return _Diary["default"].findByIdAndUpdate(id, {
+        case 14:
+          _context4.next = 16;
+          return _Diary["default"].findByIdAndUpdate(date, {
             stadium: stadium,
             watch: watch,
             weather: weather,
@@ -204,15 +211,15 @@ var postEdit = exports.postEdit = /*#__PURE__*/function () {
             ticketUrl: file ? "/".concat(file.path) : diary.ticketUrl
             // ticketUrl: ticket,
           });
-        case 14:
+        case 16:
           // console.log(`###updated lineup: ${li}`);
           console.log("###updated lineup: ".concat(diary));
           // console.log(`ticketUrl: ${ticketUrl}`);
-        case 15:
+        case 17:
           console.log("############ticketUrl: ".concat(file));
           // console.log(`############ticketUrl: ${file.path}`);
           return _context4.abrupt("return", res.redirect("/diary"));
-        case 17:
+        case 19:
         case "end":
           return _context4.stop();
       }

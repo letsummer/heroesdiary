@@ -1,5 +1,15 @@
 import multer from "multer";
 
+export const checkUserSession= (req, res, next) => {
+    if(req.session.loggedIn)
+        next();
+    else {
+        // console.log(`plz login!`);
+        // next();
+        res.redirect("/login");
+    }
+}
+
 export const localsMiddleware = (req, res, next)=>{
     
     res.locals.loggedIn = Boolean(req.session.loggedIn);

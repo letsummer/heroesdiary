@@ -25,11 +25,11 @@ const handleSearch = (error, videos) =>{
 // }
 
 export const list = async (req,res) => {
-    const {id} = req.params;
+    const {id, date} = req.params;
     const diaries = await Diary.find({});
     try{
         console.log("hello");
-        console.log(`###id: ${id}`);
+        console.log(`###date: ${date}`);
         return res.render("diarylist", {diaries});
     } catch {
         return res.send("server-error");
@@ -42,13 +42,13 @@ const axios = require("axios");
 const teams = ["WO", "SK", "LG", "OB", "KT", 
                 "HH", "SS", "HT", "LT", "NC"];
 
-export const testUrl = async (id) => {
+export const testUrl = async (date) => {
     let i;
 
     for(i=1;i<teams.length;i++){
 
-        const url = `https://api-gw.sports.naver.com/schedule/games/${id}WO${teams[i]}0${id.slice(0,4)}`;
-        const url2 = `https://api-gw.sports.naver.com/schedule/games/${id}${teams[i]}WO0${id.slice(0,4)}`;
+        const url = `https://api-gw.sports.naver.com/schedule/games/${date}WO${teams[i]}0${date.slice(0,4)}`;
+        const url2 = `https://api-gw.sports.naver.com/schedule/games/${date}${teams[i]}WO0${date.slice(0,4)}`;
         try {
             await axios.get(url);
             return url;
@@ -63,11 +63,20 @@ export const testUrl = async (id) => {
 }
 
 export const getEdit = async (req, res) => {
-    const {id} = req.params;
-    const diary = await Diary.findById(id);
+    const {userId:{_id}} = req.session;
+    const {id, date} = req.params;
+    // const diary = await Diary.findById('656437738bb9411d20cca79e');
+    const diary = await Diary.findOne({owner:req.session.userId._id, date});
+
+    // const diary = await Diary.findOne(owner == _id);
     
-    const url = await testUrl(id);
-    console.log(`###url: ${url}`);
+    // console.log(`###session id: ${req.session.userId._id}`);
+    // console.log(`###diary.owner: ${diary.owner}`);
+    // console.log(`###diary id: ${req.body.length}`);
+
+    const url = await testUrl(date);
+    // console.log(`###getEdit: ${req.params.id}, ${req.params.date}`);
+    // console.log(`###req.params: ${req.params.date}`);
     
     if(url == undefined)
         return res.status(404).render("404");
@@ -76,7 +85,7 @@ export const getEdit = async (req, res) => {
         .then((urlRes)=>{
             // console.log(`###url.data.result.game.gameId: ${ares.data.result.game.gameId}`);
             const isDiary = diary? "diary" : "newdiary";
-            return res.render(isDiary, {id: id, diary, result:urlRes.data.result.game});
+            return res.render(isDiary, {id:id, date: date, diary, result:urlRes.data.result.game});
         });
     }
     
@@ -90,10 +99,11 @@ export const getEdit = async (req, res) => {
 // }
 
 export const postEdit = async (req, res) => {
-    const {id} = req.params;
-    // console.log(`id is ${id}`);
+    const {userId:{_id}} = req.session;
+    const {id, date} = req.params;
+    console.log(`id is ${id}`);
     const {
-        body: { date, stadium, watch, weather, mood, content
+        body: { stadium, watch, weather, mood, content
             ,lineup
             // hours, 
             // minutes,
@@ -108,8 +118,9 @@ export const postEdit = async (req, res) => {
     const diary = await Diary.findById(id);
     if(!diary){
         const dbDiary = await Diary.create({
-            _id: id,
-            date:id,
+            // _id: id,
+            owner: _id,
+            date,
             stadium:stadium,
             watch:watch,
             weather:weather,
@@ -129,7 +140,7 @@ export const postEdit = async (req, res) => {
         // const lineup = diary.lineup.splice(0);
         // diary.lineup = [];
         // console.log(`###before updated lineup: ${upLineup}`);
-        await Diary.findByIdAndUpdate(id, {
+        await Diary.findByIdAndUpdate(date, {
             stadium:stadium,
             watch:watch,
             weather:weather,
