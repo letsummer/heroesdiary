@@ -9,9 +9,9 @@ block content
         header
             div 
                 span.material-symbols-outlined#prevDate chevron_left
-                span#today #{id}
+                span#today #{date}
                 span.material-symbols-outlined#postDate chevron_right
-    form(method="POST", action=`/diary/${id}`, enctype="multipart/form-data")
+    form(method="POST", action=`/diary/${date}`, enctype="multipart/form-data")
         //- input(type="submit", value="Upload")
         div.info
             table

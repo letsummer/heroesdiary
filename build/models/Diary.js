@@ -7,9 +7,11 @@ exports["default"] = void 0;
 var _mongoose = _interopRequireDefault(require("mongoose"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var diarySchema = new _mongoose["default"].Schema({
-  _id: {
-    type: String,
-    "default": "00000000"
+  // _id: {type: String, default:"00000000"},
+  owner: {
+    type: _mongoose["default"].Schema.Types.ObjectId,
+    required: true,
+    ref: "User"
   },
   date: {
     type: String,
@@ -42,8 +44,6 @@ var diarySchema = new _mongoose["default"].Schema({
     type: String,
     "default": "ticket"
   }
-}, {
-  _id: false
 });
 var Diary = _mongoose["default"].model("Diary", diarySchema);
 var _default = exports["default"] = Diary;

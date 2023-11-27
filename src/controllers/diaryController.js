@@ -75,7 +75,7 @@ export const getEdit = async (req, res) => {
     // console.log(`###diary id: ${req.body.length}`);
 
     const url = await testUrl(date);
-    // console.log(`###getEdit: ${req.params.id}, ${req.params.date}`);
+    console.log(`###date ${req.params.date}`);
     // console.log(`###req.params: ${req.params.date}`);
     
     if(url == undefined)

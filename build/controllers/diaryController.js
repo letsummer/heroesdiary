@@ -128,12 +128,14 @@ var getEdit = exports.getEdit = /*#__PURE__*/function () {
           return testUrl(date);
         case 7:
           url = _context3.sent;
+          console.log("###date ".concat(req.params.date));
+          // console.log(`###req.params: ${req.params.date}`);
           if (!(url == undefined)) {
-            _context3.next = 12;
+            _context3.next = 13;
             break;
           }
           return _context3.abrupt("return", res.status(404).render("404"));
-        case 12:
+        case 13:
           axios.get(url).then(function (urlRes) {
             // console.log(`###url.data.result.game.gameId: ${ares.data.result.game.gameId}`);
             var isDiary = diary ? "diary" : "newdiary";
@@ -144,7 +146,7 @@ var getEdit = exports.getEdit = /*#__PURE__*/function () {
               result: urlRes.data.result.game
             });
           });
-        case 13:
+        case 14:
         case "end":
           return _context3.stop();
       }
