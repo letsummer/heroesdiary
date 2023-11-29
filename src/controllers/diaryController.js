@@ -30,7 +30,7 @@ export const list = async (req,res) => {
     try{
         console.log("hello");
         console.log(`###date: ${date}`);
-        return res.render("diarylist", {diaries});
+        return res.render("diarylist", {diaries, pageTitle:"Diary List"});
     } catch {
         return res.send("server-error");
     }
@@ -85,7 +85,7 @@ export const getEdit = async (req, res) => {
         .then((urlRes)=>{
             // console.log(`###url.data.result.game.gameId: ${ares.data.result.game.gameId}`);
             const isDiary = diary? "diary" : "newdiary";
-            return res.render(isDiary, {id:id, date: date, diary, result:urlRes.data.result.game});
+            return res.render(isDiary, {pageTitle:date ,id:id, date: date, diary, result:urlRes.data.result.game});
         });
     }
     
@@ -160,6 +160,9 @@ export const postEdit = async (req, res) => {
     return res.redirect(`/diary`);
 }
 
-export const deleteDiary = (req, res) => {
-    return res.send("Delete Diary");
+export const deleteDiary = async (req, res) => {
+    const {userId:{_id}} = req.session;
+    const {id, date} = req.params;
+    await Diary.deleteOne({owner:req.session.userId._id, date});
+    return res.redirect(`.`);
 }

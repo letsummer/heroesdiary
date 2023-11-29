@@ -16,6 +16,7 @@ var checkUserSession = exports.checkUserSession = function checkUserSession(req,
 var localsMiddleware = exports.localsMiddleware = function localsMiddleware(req, res, next) {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUsername = req.session.username;
+  res.locals.siteName = "Today's Baseball";
   console.log(res.locals);
   // res.locals.siteName = "Wetube";
   next();

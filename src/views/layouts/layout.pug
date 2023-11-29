@@ -8,12 +8,16 @@ html(lang="ko")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         script(src="https://kit.fontawesome.com/2afc28705b.js" crossorigin="anonymous")
-        title Welcome!
+        title #{pageTitle} | #{siteName}
     body
-        //- nav
-            a(href="/diary") list
-            br
-            a(href=`/diary/64f92c070fc3b4579b5d8663`) diary
+        nav
+            if loggedIn
+                a(href="/") Home 
+                a(href="/") Profile 
+                a(href="/logout") Logout 
+            else
+                a(href="/join") Join 
+                a(href="/login") Login 
         main
             block content
     

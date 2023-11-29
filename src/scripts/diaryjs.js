@@ -1,3 +1,14 @@
+const btnDelete = document.querySelector(".btnDelete");
+btnDelete.addEventListener("click", btnDeleteEvent);
+function btnDeleteEvent(e){
+    const isDelete = confirm("작성한 내용을 초기화 하시겠습니까?\n❗주의❗ 다시 복구할 수 없습니다.");
+    if(isDelete){
+        return true
+    }
+    else
+        e.preventDefault();
+        // return false;
+}
 
 const btnClose = document.querySelector(".btnClose");
 
@@ -16,7 +27,7 @@ function btnCloseEvent(){
 document.querySelectorAll("input[type=radio]")
     .forEach(item => {
         item.addEventListener("change", () => {
-            console.log(item.value);
+            // console.log(item.value);
         });
 });
 
@@ -63,8 +74,8 @@ function clickedPrevdate(){
     
     currMonth = String(currMonth).padStart(2,0);
     currDate = String(currDate).padStart(2,0);
-    console.log(`${year}년 ${month}월 ${date}일`);
-    console.log(`${currYear}년 ${currMonth}월 ${currDate}일`);
+    // console.log(`${year}년 ${month}월 ${date}일`);
+    // console.log(`${currYear}년 ${currMonth}월 ${currDate}일`);
 
     document.location.href = `${currYear}${currMonth}${currDate}`;
 }
@@ -86,13 +97,13 @@ function clickedPostdate(){
     else if(month == 2 && currDate >= 28){
         if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0 ){
             if(currDate > 29){
-                console.log("29일초과 && 윤년");
+                // console.log("29일초과 && 윤년");
                 currMonth = 3;
                 currDate = 1;
             }
         }
         else{
-            console.log("28일이상");
+            // console.log("28일이상");
             currMonth = 3;
             currDate = 1;
         }
@@ -100,8 +111,8 @@ function clickedPostdate(){
     
     currMonth = String(currMonth).padStart(2,0);
     currDate = String(currDate).padStart(2,0);
-    console.log(`${year}년 ${month}월 ${date}일`);
-    console.log(`${currYear}년 ${currMonth}월 ${currDate}일`);
+    // console.log(`${year}년 ${month}월 ${date}일`);
+    // console.log(`${currYear}년 ${currMonth}월 ${currDate}일`);
 
     document.location.href = `${currYear}${currMonth}${currDate}`;
 }

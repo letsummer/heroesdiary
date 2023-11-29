@@ -47,7 +47,8 @@ var list = exports.list = /*#__PURE__*/function () {
           console.log("hello");
           console.log("###date: ".concat(date));
           return _context.abrupt("return", res.render("diarylist", {
-            diaries: diaries
+            diaries: diaries,
+            pageTitle: "Diary List"
           }));
         case 10:
           _context.prev = 10;
@@ -140,6 +141,7 @@ var getEdit = exports.getEdit = /*#__PURE__*/function () {
             // console.log(`###url.data.result.game.gameId: ${ares.data.result.game.gameId}`);
             var isDiary = diary ? "diary" : "newdiary";
             return res.render(isDiary, {
+              pageTitle: date,
               id: id,
               date: date,
               diary: diary,
@@ -231,6 +233,28 @@ var postEdit = exports.postEdit = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
-var deleteDiary = exports.deleteDiary = function deleteDiary(req, res) {
-  return res.send("Delete Diary");
-};
+var deleteDiary = exports.deleteDiary = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(req, res) {
+    var _id, _req$params4, id, date;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _id = req.session.userId._id;
+          _req$params4 = req.params, id = _req$params4.id, date = _req$params4.date;
+          _context5.next = 4;
+          return _Diary["default"].deleteOne({
+            owner: req.session.userId._id,
+            date: date
+          });
+        case 4:
+          return _context5.abrupt("return", res.redirect("."));
+        case 5:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
+  }));
+  return function deleteDiary(_x8, _x9) {
+    return _ref5.apply(this, arguments);
+  };
+}();

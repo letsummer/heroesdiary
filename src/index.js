@@ -22,7 +22,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie:{
-        // maxAge: 20000,
+        expires : new Date(Date.now() + 86400e3)
     },
     store: MongoStore.create({mongoUrl: process.env.DB_URL}), 
     })

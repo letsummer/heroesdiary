@@ -1,5 +1,15 @@
 "use strict";
 
+var btnDelete = document.querySelector(".btnDelete");
+btnDelete.addEventListener("click", btnDeleteEvent);
+function btnDeleteEvent(e) {
+  var isDelete = confirm("작성한 내용을 초기화 하시겠습니까?\n❗주의❗ 다시 복구할 수 없습니다.");
+  if (isDelete) {
+    return true;
+  } else e.preventDefault();
+  // return false;
+}
+
 var btnClose = document.querySelector(".btnClose");
 btnClose.addEventListener("click", btnCloseEvent);
 function btnCloseEvent() {
@@ -11,7 +21,7 @@ function btnCloseEvent() {
 /* radio button 저장*/
 document.querySelectorAll("input[type=radio]").forEach(function (item) {
   item.addEventListener("change", function () {
-    console.log(item.value);
+    // console.log(item.value);
   });
 });
 
@@ -47,8 +57,9 @@ function clickedPrevdate() {
   }
   currMonth = String(currMonth).padStart(2, 0);
   currDate = String(currDate).padStart(2, 0);
-  console.log("".concat(year, "\uB144 ").concat(month, "\uC6D4 ").concat(date, "\uC77C"));
-  console.log("".concat(currYear, "\uB144 ").concat(currMonth, "\uC6D4 ").concat(currDate, "\uC77C"));
+  // console.log(`${year}년 ${month}월 ${date}일`);
+  // console.log(`${currYear}년 ${currMonth}월 ${currDate}일`);
+
   document.location.href = "".concat(currYear).concat(currMonth).concat(currDate);
 }
 function clickedPostdate() {
@@ -67,20 +78,21 @@ function clickedPostdate() {
   } else if (month == 2 && currDate >= 28) {
     if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
       if (currDate > 29) {
-        console.log("29일초과 && 윤년");
+        // console.log("29일초과 && 윤년");
         currMonth = 3;
         currDate = 1;
       }
     } else {
-      console.log("28일이상");
+      // console.log("28일이상");
       currMonth = 3;
       currDate = 1;
     }
   }
   currMonth = String(currMonth).padStart(2, 0);
   currDate = String(currDate).padStart(2, 0);
-  console.log("".concat(year, "\uB144 ").concat(month, "\uC6D4 ").concat(date, "\uC77C"));
-  console.log("".concat(currYear, "\uB144 ").concat(currMonth, "\uC6D4 ").concat(currDate, "\uC77C"));
+  // console.log(`${year}년 ${month}월 ${date}일`);
+  // console.log(`${currYear}년 ${currMonth}월 ${currDate}일`);
+
   document.location.href = "".concat(currYear).concat(currMonth).concat(currDate);
 }
 today.innerText = "".concat(todayContent.slice(0, 4), ".").concat(todayContent.slice(4, 6), ".").concat(todayContent.slice(6));
