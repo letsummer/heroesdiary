@@ -10,6 +10,7 @@ var _expressSession = _interopRequireDefault(require("express-session"));
 var _connectMongo = _interopRequireDefault(require("connect-mongo"));
 var _rootRouter = _interopRequireDefault(require("./routers/rootRouter.js"));
 var _diaryRouter = _interopRequireDefault(require("./routers/diaryRouter.js"));
+var _userRouter = _interopRequireDefault(require("./routers/userRouter.js"));
 var _middlewares = require("./middlewares.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var app = (0, _express["default"])();
@@ -45,6 +46,7 @@ app.use(_express["default"]["static"]('public'));
 app.use("/uploads", _express["default"]["static"]("uploads"));
 app.use("/", _rootRouter["default"]);
 app.use("/diary", _diaryRouter["default"]);
+app.use("/user", _userRouter["default"]);
 app.get('*', function (req, res) {
   res.render("404");
 });

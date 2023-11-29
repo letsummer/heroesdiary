@@ -4,6 +4,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter.js";
 import diaryRouter from "./routers/diaryRouter.js";
+import userRouter from "./routers/userRouter.js";
 import {localsMiddleware} from "./middlewares.js";
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(express.static('public'));
 app.use("/uploads", express.static("uploads"));
 app.use("/", rootRouter);
 app.use("/diary", diaryRouter);
+app.use("/user", userRouter);
 
 app.get('*', function(req, res){
     res.render("404");

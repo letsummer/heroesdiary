@@ -59,3 +59,15 @@ export const logout = (req, res) =>{
     req.session.destroy();
     return res.redirect("/");
 };
+
+export const userProfile = (req, res) => {
+    return res.render("profile");
+};
+
+export const editProfile = (req, res) => {
+    return res.render("editProfile");
+};
+
+export const deleteAccount = (req, res) =>{
+    return res.send("delete account");
+};
