@@ -24,15 +24,15 @@ a:visited {
 input{
     height: 25px;
 }
-.btnClose,
-.btnDelete{
-    cursor:pointer;
-}
 .btn,button {
     border: none;
     height: 20px;
     color: grey;
     /* background-color: yellow; */
+}
+.btnClose,
+.btnDelete{
+    cursor:pointer;
 }
 button:hover{
     cursor: pointer;
@@ -122,11 +122,11 @@ label {
 
 /* CHECKED STYLES */
 [type=radio]:checked + i {
-    color: yellowgreen;
+    color: #FF004D;
 }
-
 .middle {
     width: 100%;
+    height: 100%;
     margin: 5px;
     display: flex;
     flex-direction: row;
@@ -194,14 +194,14 @@ input[type="file"]{
 main{
     /* max-width: 1000px; */
     width: 100%;
-    height: 300px;
+    height: 250px;
     margin:10px;
 }
 
 main textarea {
     /* min-width: 100vh; */
     width: 90%;
-    height: 50%;
+    /* height: 50%; */
     /* max-width: 500px; */
     /* border: none; */
     /* outline: none; */
@@ -212,6 +212,8 @@ main textarea {
 }
 .btnUp{
     /* float: right; */
+    width: 150px;
+    /* height: 100px; */
 }
 .material-symbols-outlined {
   font-variation-settings:

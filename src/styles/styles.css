@@ -2,5 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm/style.css');
 *{
-    font-family: 'NeoDunggeunmo';   
+    font-family: 'NeoDunggeunmo';
 }
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* diary 세부내용에 영향 받음 */
+/* main{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
