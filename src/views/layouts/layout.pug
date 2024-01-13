@@ -12,12 +12,13 @@ html(lang="ko")
     body
         nav
             if loggedIn
-                a(href="/") Home 
-                a(href="/user") Profile 
-                a(href="/logout") Logout 
+                a(href="/").material-symbols-outlined home 
+                a(href="/user").material-symbols-outlined manage_accounts
+                a(href="/logout").material-symbols-outlined logout
             else
-                a(href="/join") Join 
-                a(href="/login") Login 
+                a(href="/").material-symbols-outlined home 
+                a(href="/join").material-symbols-outlined person_add
+                a(href="/login").material-symbols-outlined login 
         main
             block content
     

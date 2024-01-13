@@ -1,6 +1,43 @@
 extends layouts/layout.pug
 block style 
+    style
+        include ../styles/layout.css
 block content
-    h3 프로필 수정
-    form(action="", method="post") 
+    form(action="", method="post")
+        h1 프로필 수정
+        //- input(placeholder="Username", name="username", type="text", required)
+        //- input(placeholder="My Team", name="myteam", type="text", required)
+        //- //- input(placeholder="Email", name="email", type="email", required)
+        //- input(placeholder="current Password", name="password", type="password", required)
+        //- input(placeholder="new Password", name="newpassword", type="password", required)
+        //- input(placeholder="Confirm Password", name="newpassword2", type="password", required)
+        //- input(placeholder="Location", name="location", type="text", required)
         
+        //- //- input(type="submit", value="Edit")
+        //- input(type="button", value="Edit")
+        table 
+            tr        
+                td 닉네임
+                td
+                    input(placeholder=" 예) 동글이", name="username", type="text", required)
+            tr        
+                td 나의 팀
+                td
+                    input(placeholder=" 예) 키움히어로즈", name="myteam", type="text", required)
+            tr
+                td 현재 비밀번호
+                td
+                    input(placeholder=" 현재 비밀번호", name="password", type="password", required)
+            tr
+                td 새 비밀번호
+                td
+                    input(placeholder=" 새 비밀번호", name="newpassword", type="password", required)
+            tr
+                td 새 비밀번호 확인
+                td
+                    input(placeholder=" 새 비밀번호 확인", name="newpassword2", type="password", required)
+            tr        
+                td 지역
+                td
+                    input(placeholder=" (선택)", name="location", type="text", required)
+        input(type="button", value="Edit")

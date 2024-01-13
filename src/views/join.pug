@@ -1,16 +1,35 @@
-extends layouts/layout.pug 
+extends layouts/layout.pug
+block style 
+    style
+        include ../styles/layout.css
 block content 
-    h1 Join page
     if errorMessage
-        span=errorMessage
-    form(action="", method="post") 
-        input(placeholder="Username", name="username", type="text", required)
-        input(placeholder="Email", name="email", type="email", required)
-        input(placeholder="Password", name="password", type="password", required)
-        input(placeholder="Confirm Password", name="password2", type="password", required)
-        input(placeholder="Location", name="location", type="text", required)
+        div.errorMessage
+            span=errorMessage
+    form(action="", method="post")
+        h1(id="formHeader") 회원가입
+        table 
+            tr        
+                td 이메일(ID)
+                td
+                    input(placeholder=" 예) abc@xyz.com", name="email", type="email", required)
+            tr
+                td 비밀번호
+                td
+                    input(placeholder="", name="password", type="password", required)
+            tr
+                td 비밀번호 확인
+                td
+                    input(placeholder="", name="password2", type="password", required)
+            tr
+                td 닉네임
+                td
+                    input(placeholder=" (필수)", name="username", type="text", required)
+            tr        
+                td 지역
+                td
+                    input(placeholder=" (선택)", name="location", type="text")
         input(type="submit", value="Join")
-    hr
     div
         span 이미 계정이 있으신가요? 
         a(href="/login") 로그인 &rarr; 

@@ -1,12 +1,15 @@
 extends layouts/layout.pug
 block style 
+    style
+        include ../styles/layout.css
 block content
-    h1 Welcome Baseball diary
-    if loggedIn
-        h5 #{loggedInUsername}님...그래도 히어로즈 사랑하시죠?
-    //- h5=name
-    if loggedIn
-        a(href="/diary") Diary 
+    div.loginContent
+        h1 Welcome Baseball diary
+        if loggedIn
+            h3 #{loggedInUsername}님...그래도 히어로즈 사랑하시죠?
+        //- h5=name
+        if loggedIn
+            a(href="/diary").material-symbols-outlined edit_calendar 
         //- a(href="/logout") Logout 
         //- a(href="/") Profile 
     //- else

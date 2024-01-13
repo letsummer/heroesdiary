@@ -1,6 +1,9 @@
 extends layouts/layout.pug
-include mixins/diarytitle
+//- include mixins/diarytitle
 //- block script
+block style 
+    style
+        include ../styles/layout.css
 block content 
     //- h5 diary list
     //- each item in diaries
