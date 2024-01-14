@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import Diary from "../models/Diary.js";
 
-export const getJoin = (req, res) => res.render("join", {pageTitle: "Join"});
+export const getJoin = (req, res) => res.render("join", {pageTitle: "회원가입"});
 export const postJoin = async (req, res) => {
     console.log(req.body);
     const {username, email, password, password2, location} = req.body;
@@ -33,7 +33,7 @@ export const postJoin = async (req, res) => {
 };
 
 export const getLogin = (req, res) => res.render("login", {
-    pageTitle: "Login"});
+    pageTitle: "로그인"});
 
 export const postLogin = async (req, res) => {
     const {email, password} = req.body;
@@ -65,8 +65,49 @@ export const userProfile = (req, res) => {
     return res.render("profile");
 };
 
-export const editProfile = (req, res) => {
-    return res.render("editProfile");
+export const getEditProfile = async (req, res) => {
+    return res.render("editProfile", {pageTitle: "프로필수정"});
+};
+
+export const postEditProfile = async (req, res) => {
+    const {
+        session:{
+            userId: { _id },
+        },
+        body:{ username, oldpw, newpw, newpw2, location },
+    } = req;
+    const user = await User.findById(_id);
+    const ok = await bcrypt.compare(oldpw, req.session.userId.password);
+    if(newpw){
+        if(!ok){
+            return res.status(400).render("editProfile",{
+                errorMessage: "현재 패스워드를 확인해주세요.",
+            });
+        }
+        else{
+            if(newpw !== newpw2){
+                return res.status(400).render("editProfile",{
+                    errorMessage: "패스워드가 일치하지 않습니다.",
+                });
+            }
+            else{
+                user.password = newpw;
+                await user.save();
+                req.session.destroy();
+                return res.redirect("/");
+            }
+
+        }
+    }
+    const updatedUser = await User.findByIdAndUpdate(_id,{
+        username: username? username : user.username,
+        location,
+    },
+        { new: true }
+    );
+    req.session.user = updatedUser;
+    req.session.username = updatedUser.username;
+    return res.redirect(`/user`);
 };
 
 export const deleteAccount = async (req, res) =>{

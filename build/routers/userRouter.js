@@ -9,6 +9,6 @@ var _userController = require("../controllers/userController.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var userRouter = _express["default"].Router();
 userRouter.get("/", _userController.userProfile);
-userRouter.get("/edit", _userController.editProfile);
+userRouter.route("/edit").get(_userController.getEditProfile).post(_userController.postEditProfile);
 userRouter.get("/delete", _userController.deleteAccount);
 var _default = exports["default"] = userRouter;

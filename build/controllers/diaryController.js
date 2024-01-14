@@ -197,7 +197,7 @@ var postEdit = exports.postEdit = /*#__PURE__*/function () {
             mood: mood,
             content: content,
             lineup: lineup,
-            ticketUrl: file ? "${file.path}" : ""
+            ticketUrl: file ? "/".concat(file.path) : ""
           });
         case 11:
           dbDiary = _context4.sent;

@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.userProfile = exports.postLogin = exports.postJoin = exports.logout = exports.getLogin = exports.getJoin = exports.editProfile = exports.deleteAccount = void 0;
+exports.userProfile = exports.postLogin = exports.postJoin = exports.postEditProfile = exports.logout = exports.getLogin = exports.getJoin = exports.getEditProfile = exports.deleteAccount = void 0;
 var _bcrypt = _interopRequireDefault(require("bcrypt"));
 var _User = _interopRequireDefault(require("../models/User.js"));
 var _Diary = _interopRequireDefault(require("../models/Diary.js"));
@@ -14,7 +14,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var getJoin = exports.getJoin = function getJoin(req, res) {
   return res.render("join", {
-    pageTitle: "Join"
+    pageTitle: "회원가입"
   });
 };
 var postJoin = exports.postJoin = /*#__PURE__*/function () {
@@ -75,7 +75,7 @@ var postJoin = exports.postJoin = /*#__PURE__*/function () {
 }();
 var getLogin = exports.getLogin = function getLogin(req, res) {
   return res.render("login", {
-    pageTitle: "Login"
+    pageTitle: "로그인"
   });
 };
 var postLogin = exports.postLogin = /*#__PURE__*/function () {
@@ -133,37 +133,116 @@ var logout = exports.logout = function logout(req, res) {
 var userProfile = exports.userProfile = function userProfile(req, res) {
   return res.render("profile");
 };
-var editProfile = exports.editProfile = function editProfile(req, res) {
-  return res.render("editProfile");
-};
-var deleteAccount = exports.deleteAccount = /*#__PURE__*/function () {
+var getEditProfile = exports.getEditProfile = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
-    var id;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          // const {userId:{_id}} = req.session;
-          id = req.session.userId._id;
-          req.session.destroy();
-          console.log("###deleteAccount id: ", id);
-          _context3.next = 5;
-          return _Diary["default"].deleteMany({
-            owner: id
-          });
-        case 5:
-          _context3.next = 7;
-          return _User["default"].deleteOne({
-            _id: id
-          });
-        case 7:
-          return _context3.abrupt("return", res.redirect("/"));
-        case 8:
+          return _context3.abrupt("return", res.render("editProfile", {
+            pageTitle: "프로필수정"
+          }));
+        case 1:
         case "end":
           return _context3.stop();
       }
     }, _callee3);
   }));
-  return function deleteAccount(_x5, _x6) {
+  return function getEditProfile(_x5, _x6) {
     return _ref3.apply(this, arguments);
+  };
+}();
+var postEditProfile = exports.postEditProfile = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
+    var _id, _req$body3, username, oldpw, newpw, newpw2, location, user, ok, updatedUser;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _id = req.session.userId._id, _req$body3 = req.body, username = _req$body3.username, oldpw = _req$body3.oldpw, newpw = _req$body3.newpw, newpw2 = _req$body3.newpw2, location = _req$body3.location;
+          _context4.next = 3;
+          return _User["default"].findById(_id);
+        case 3:
+          user = _context4.sent;
+          _context4.next = 6;
+          return _bcrypt["default"].compare(oldpw, req.session.userId.password);
+        case 6:
+          ok = _context4.sent;
+          if (!newpw) {
+            _context4.next = 21;
+            break;
+          }
+          if (ok) {
+            _context4.next = 12;
+            break;
+          }
+          return _context4.abrupt("return", res.status(400).render("editProfile", {
+            errorMessage: "현재 패스워드를 확인해주세요."
+          }));
+        case 12:
+          if (!(newpw !== newpw2)) {
+            _context4.next = 16;
+            break;
+          }
+          return _context4.abrupt("return", res.status(400).render("editProfile", {
+            errorMessage: "패스워드가 일치하지 않습니다."
+          }));
+        case 16:
+          user.password = newpw;
+          _context4.next = 19;
+          return user.save();
+        case 19:
+          req.session.destroy();
+          return _context4.abrupt("return", res.redirect("/"));
+        case 21:
+          _context4.next = 23;
+          return _User["default"].findByIdAndUpdate(_id, {
+            username: username ? username : user.username,
+            location: location
+          }, {
+            "new": true
+          });
+        case 23:
+          updatedUser = _context4.sent;
+          req.session.user = updatedUser;
+          req.session.username = updatedUser.username;
+          return _context4.abrupt("return", res.redirect("/user"));
+        case 27:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return function postEditProfile(_x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+var deleteAccount = exports.deleteAccount = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(req, res) {
+    var id;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          // const {userId:{_id}} = req.session;
+          id = req.session.userId._id;
+          req.session.destroy();
+          console.log("###deleteAccount id: ", id);
+          _context5.next = 5;
+          return _Diary["default"].deleteMany({
+            owner: id
+          });
+        case 5:
+          _context5.next = 7;
+          return _User["default"].deleteOne({
+            _id: id
+          });
+        case 7:
+          return _context5.abrupt("return", res.redirect("/"));
+        case 8:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
+  }));
+  return function deleteAccount(_x9, _x10) {
+    return _ref5.apply(this, arguments);
   };
 }();

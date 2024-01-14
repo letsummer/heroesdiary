@@ -1,9 +1,9 @@
 import express from "express";
-import {userProfile, editProfile, deleteAccount} from "../controllers/userController.js";
+import {userProfile, getEditProfile, postEditProfile, deleteAccount} from "../controllers/userController.js";
 const userRouter = express.Router();
 
 userRouter.get("/", userProfile);
-userRouter.get("/edit", editProfile);
+userRouter.route("/edit").get(getEditProfile).post(postEditProfile);
 userRouter.get("/delete", deleteAccount);
 
 export default userRouter;

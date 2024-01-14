@@ -127,7 +127,7 @@ export const postEdit = async (req, res) => {
             mood:mood,
             content:content,
             lineup:lineup,
-            ticketUrl: file ? `\${file.path}` : "",
+            ticketUrl: file ? `/${file.path}` : "",
         });
         // console.log(`###created lineup: ${diary.lineup}`);
         // const dbDiary = await diary.save();
