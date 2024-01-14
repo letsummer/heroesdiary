@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
+import Diary from "../models/Diary.js";
 
 export const getJoin = (req, res) => res.render("join", {pageTitle: "Join"});
 export const postJoin = async (req, res) => {
@@ -68,6 +69,13 @@ export const editProfile = (req, res) => {
     return res.render("editProfile");
 };
 
-export const deleteAccount = (req, res) =>{
-    return res.send("delete account");
+export const deleteAccount = async (req, res) =>{
+    // const {userId:{_id}} = req.session;
+    const id = req.session.userId._id;
+    req.session.destroy();
+    console.log(`###deleteAccount id: `, id);
+    await Diary.deleteMany({owner:id});
+    await User.deleteOne({_id:id});
+    return res.redirect(`/`);
+    // return res.send("delete account");
 };

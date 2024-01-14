@@ -197,7 +197,7 @@ var postEdit = exports.postEdit = /*#__PURE__*/function () {
             mood: mood,
             content: content,
             lineup: lineup,
-            ticketUrl: file ? "/".concat(file.path) : ""
+            ticketUrl: file ? "${file.path}" : ""
           });
         case 11:
           dbDiary = _context4.sent;
@@ -213,7 +213,8 @@ var postEdit = exports.postEdit = /*#__PURE__*/function () {
             content: content,
             lineup: lineup,
             ticketUrl: file ? "/".concat(file.path) : diary.ticketUrl
-            // ticketUrl: ticket,
+            // ticketUrl: `/${file.path}`,
+            // ticketUrl: file ? diary.ticketUrl : `/${file.path}`,
           });
         case 16:
           // console.log(`###updated lineup: ${li}`);
@@ -247,7 +248,7 @@ var deleteDiary = exports.deleteDiary = /*#__PURE__*/function () {
             date: date
           });
         case 4:
-          return _context5.abrupt("return", res.redirect("."));
+          return _context5.abrupt("return", res.redirect("/diary"));
         case 5:
         case "end":
           return _context5.stop();

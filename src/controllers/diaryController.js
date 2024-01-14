@@ -127,7 +127,7 @@ export const postEdit = async (req, res) => {
             mood:mood,
             content:content,
             lineup:lineup,
-            ticketUrl: file ? `/${file.path}` : "",
+            ticketUrl: file ? `\${file.path}` : "",
         });
         // console.log(`###created lineup: ${diary.lineup}`);
         // const dbDiary = await diary.save();
@@ -148,7 +148,8 @@ export const postEdit = async (req, res) => {
             content:content,
             lineup:lineup,
             ticketUrl: file ? `/${file.path}` : diary.ticketUrl,
-            // ticketUrl: ticket,
+            // ticketUrl: `/${file.path}`,
+            // ticketUrl: file ? diary.ticketUrl : `/${file.path}`,
         });
         // console.log(`###updated lineup: ${li}`);
         console.log(`###updated lineup: ${diary}`);
@@ -164,5 +165,5 @@ export const deleteDiary = async (req, res) => {
     const {userId:{_id}} = req.session;
     const {id, date} = req.params;
     await Diary.deleteOne({owner:req.session.userId._id, date});
-    return res.redirect(`.`);
+    return res.redirect(`/diary`);
 }

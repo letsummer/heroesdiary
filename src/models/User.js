@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     location: {type: String},
-    // diaries: [{ type: mongoose.Schema.Types.ObjectId, ref: "Diary" }],
+    diaries: [{ type: mongoose.Schema.Types.ObjectId, ref: "Diary" }],
 });
 
 userSchema.pre('save', async function(){

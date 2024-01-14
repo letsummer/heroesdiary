@@ -3,4 +3,6 @@ block content
     div 
         h3 #{loggedInUsername} 님의 프로필
     a(href="user/edit") 프로필 수정 
-    a(href="user/delete") 계정 탈퇴  
+    a(href="user/delete").btnDelete 계정 탈퇴  
+    script
+            include ../scripts/userjs.js

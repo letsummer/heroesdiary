@@ -27,10 +27,12 @@ var userSchema = new _mongoose["default"].Schema({
   },
   location: {
     type: String
-  }
-  // diaries: [{ type: mongoose.Schema.Types.ObjectId, ref: "Diary" }],
+  },
+  diaries: [{
+    type: _mongoose["default"].Schema.Types.ObjectId,
+    ref: "Diary"
+  }]
 });
-
 userSchema.pre('save', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
   return _regeneratorRuntime().wrap(function _callee$(_context) {
     while (1) switch (_context.prev = _context.next) {
